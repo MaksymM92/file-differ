@@ -1,4 +1,4 @@
-import {Command} from 'commander/esm.mjs';
+import { Command } from 'commander/esm.mjs';
 import {
   compare,
   convertToString,
@@ -12,20 +12,21 @@ const compareFiles = (file1, file2) => {
   const comparisonResult = compare(firstFileData, secondFileData);
   const sortedResult = sortAlphabeticaly(comparisonResult);
   const programOutput = convertToString(sortedResult);
-  console.log(programOutput);
+  return programOutput;
 };
 
 const runProgramme = () => {
   const program = new Command();
 
   program
-    .description('Compares two configuration files and shows a difference.')
+    .description('Compares two configuration __fixtures__ and shows a difference.')
     .version('1.0.0')
     .arguments('<filepath1> <filepath2>')
     .option('-f, --format [type]', 'output format')
     .action((firstFile, secondFile) => {
-      compareFiles(firstFile, secondFile);
+      const result = compareFiles(firstFile, secondFile);
+      console.log(result);
     });
   program.parse(process.argv);
 };
-export default runProgramme;
+export { runProgramme, compareFiles };

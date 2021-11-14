@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "commander": "^8.3.0",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "jest": "^27.3.1"
   }
 }

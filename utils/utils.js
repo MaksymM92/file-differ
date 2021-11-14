@@ -41,7 +41,7 @@ const convertToString = (data) => {
   for (let i = 0; i < data.length; i += 1) {
     outputString += `\n ${data[i]}`;
   }
-  return `${outputString} \n }`;
+  return `${outputString}}`;
 };
 
 export {
