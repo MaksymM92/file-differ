@@ -2,7 +2,6 @@ import { Command } from 'commander/esm.mjs';
 import {
   compare,
   convertToString,
-  sortAlphabeticaly,
   getFileData,
 } from '../utils/utils.js';
 
@@ -10,8 +9,7 @@ const compareFiles = (file1, file2) => {
   const firstFileData = getFileData(file1);
   const secondFileData = getFileData(file2);
   const comparisonResult = compare(firstFileData, secondFileData);
-  const sortedResult = sortAlphabeticaly(comparisonResult);
-  const programOutput = convertToString(sortedResult);
+  const programOutput = convertToString(comparisonResult);
   return programOutput;
 };
 

@@ -1,26 +1,43 @@
 import fs from 'fs';
+import _ from 'lodash';
 
 const compare = (file1, file2) => {
-  const result = [];
+  const keys = [];
   Object.keys(file1).forEach((key) => {
-    if (file2[key]) {
-      if (file1[key] === file2[key]) {
-        result.push(`  ${key}: ${file1[key]}`);
-      } else {
-        result.push(`- ${key}: ${file1[key]}`);
-        result.push(`+ ${key}: ${file2[key]}`);
-      }
-    } else {
-      result.push(`- ${key}: ${file1[key]}`);
-    }
+    keys.push(key);
   });
-
   Object.keys(file2).forEach((key) => {
-    if (!file1[key]) {
-      result.push(`+ ${key}: ${file2[key]}`);
+    keys.push(key);
+  });
+  const uniqueKeys = [...new Set(keys)];
+  const sortedKeys = _.sortBy(uniqueKeys);
+  // eslint-disable-next-line array-callback-return,consistent-return
+  const resultTree = sortedKeys.map((key) => {
+    if (file1[key] && file2[key]) {
+      if (file1[key] === file2[key]) {
+        return { key, action: 'unchanged', value: file1[key] };
+      }
+
+      if (file1[key] !== file2[key]) {
+        return {
+          key, action: 'changed', value1: file1[key], value2: file2[key],
+        };
+      }
+    }
+
+    if (!(key in file1)) {
+      return {
+        key, action: 'added', value: file2[key],
+      };
+    }
+
+    if (!(key in file2)) {
+      return {
+        key, action: 'deleted', value: file1[key],
+      };
     }
   });
-  return result.sort();
+  return resultTree;
 };
 
 const getFileData = (filePath) => {
@@ -33,13 +50,25 @@ const getFileData = (filePath) => {
   return JSON.parse(data);
 };
 
-const sortAlphabeticaly = (data) => data.sort((a, b) => a[2].localeCompare(b[2]));
-
 const convertToString = (data) => {
-  let outputString = '{';
+  let outputString = '{\n';
 
   for (let i = 0; i < data.length; i += 1) {
-    outputString += `\n ${data[i]}`;
+    if (data[i].action === 'unchanged') {
+      outputString += ` ${data[i].key}: ${data[i].value}\n`;
+    }
+
+    if (data[i].action === 'deleted') {
+      outputString += `-${data[i].key}: ${data[i].value}\n`;
+    }
+
+    if (data[i].action === 'changed') {
+      outputString += `-${data[i].key}: ${data[i].value2}\n+${data[i].key}: ${data[i].value1}\n`;
+    }
+
+    if (data[i].action === 'added') {
+      outputString += `+${data[i].key}: ${data[i].value}\n`;
+    }
   }
   return `${outputString}}`;
 };
@@ -47,6 +76,5 @@ const convertToString = (data) => {
 export {
   compare,
   convertToString,
-  sortAlphabeticaly,
   getFileData,
 };
