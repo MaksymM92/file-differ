@@ -1,5 +1,6 @@
 import fs from 'fs';
 import _ from 'lodash';
+import parseData from '../src/parsers.js';
 
 const compare = (file1, file2) => {
   const keys = [];
@@ -42,12 +43,13 @@ const compare = (file1, file2) => {
 
 const getFileData = (filePath) => {
   let data;
+  const fileFormat = filePath.split('.').pop();
   try {
     data = fs.readFileSync(filePath);
   } catch (err) {
     console.error(err);
   }
-  return JSON.parse(data);
+  return parseData(data, fileFormat);
 };
 
 const convertToString = (data) => {

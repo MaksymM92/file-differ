@@ -12,10 +12,12 @@ const readFixture = (filename) => fs.readFileSync(getFixturePath(filename), 'utf
 
 const result = readFixture('result.txt');
 
+const fileFormats = ['json', 'yml'];
+
 describe('gendiff', () => {
-  test('compareFiles', () => {
-    const file1 = getFixturePath('firstFile.json');
-    const file2 = getFixturePath('secondFile.json');
+  test.each(fileFormats)('compareFiles', (format) => {
+    const file1 = getFixturePath(`firstFile.${format}`);
+    const file2 = getFixturePath(`firstFile.${format}`);
 
     expect(compareFiles(file1, file2)).toEqual(result);
   });
