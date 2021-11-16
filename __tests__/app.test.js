@@ -17,7 +17,7 @@ const fileFormats = ['json', 'yml'];
 describe('gendiff', () => {
   test.each(fileFormats)('compareFiles', (format) => {
     const file1 = getFixturePath(`firstFile.${format}`);
-    const file2 = getFixturePath(`firstFile.${format}`);
+    const file2 = getFixturePath(`secondFile.${format}`);
 
     expect(compareFiles(file1, file2)).toEqual(result);
   });

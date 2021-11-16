@@ -16,7 +16,7 @@ const compare = (file1, file2) => {
   const resultTree = sortedKeys.map((key) => {
     if (file1[key] && file2[key]) {
       if (file1[key] === file2[key]) {
-        return { key, action: 'unchanged', value: file1[key] };
+        return {key, action: 'unchanged', value: file1[key]};
       }
 
       if (file1[key] !== file2[key]) {
