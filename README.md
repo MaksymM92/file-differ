@@ -9,3 +9,6 @@
 
 ### JSONs comaparison
 [![asciicast](https://asciinema.org/a/wPaOwC4l1SvnnrgVUXm8awAgz.svg)](https://asciinema.org/a/wPaOwC4l1SvnnrgVUXm8awAgz)
+
+### YAML comaparison
+[![asciicast](https://asciinema.org/a/yxW3fvMxDkM49uDsaLfzRAw88.svg)](https://asciinema.org/a/yxW3fvMxDkM49uDsaLfzRAw88)
