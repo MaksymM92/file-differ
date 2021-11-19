@@ -12,3 +12,6 @@
 
 ### YAML comaparison
 [![asciicast](https://asciinema.org/a/yxW3fvMxDkM49uDsaLfzRAw88.svg)](https://asciinema.org/a/yxW3fvMxDkM49uDsaLfzRAw88)
+
+### Nested tree comparison
+[![asciicast](https://asciinema.org/a/TvjlR0J4n6S9pnZigIXEOdgAx.svg)](https://asciinema.org/a/TvjlR0J4n6S9pnZigIXEOdgAx)
