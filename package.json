@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/MaksymM92/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/MaksymM92/frontend-project-lvl2/actions)",
-  "main": "app.js",
+  "main": "index.js",
   "type": "module",
   "bin": {
     "gendiff": "bin/genDiff.js"
