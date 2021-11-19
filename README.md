@@ -15,3 +15,6 @@
 
 ### Nested tree comparison
 [![asciicast](https://asciinema.org/a/TvjlR0J4n6S9pnZigIXEOdgAx.svg)](https://asciinema.org/a/TvjlR0J4n6S9pnZigIXEOdgAx)
+
+### Plain format
+[![asciicast](https://asciinema.org/a/hXJejY4Vzd0XY9gRbqanVDwQS.svg)](https://asciinema.org/a/hXJejY4Vzd0XY9gRbqanVDwQS)
