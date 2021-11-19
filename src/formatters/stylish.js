@@ -56,9 +56,9 @@ const renderByType = (node, depth, type, renderNodes) => {
   return output;
 };
 
-const convertTree = (tree) => {
+const convertTreeStylish = (tree) => {
   const renderNodes = (node, depth) => renderByType(node, depth, node.type, renderNodes);
   return renderNodes(tree, 0);
 };
 
-export default convertTree;
+export default convertTreeStylish;

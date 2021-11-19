@@ -1,7 +1,7 @@
 import { Command } from 'commander/esm.mjs';
 import getFileData from '../utils/utils.js';
 import buildTree from './buildTree.js';
-import selectFormat from './formatters/formats.js';
+import selectFormat from './formatters/index.js';
 
 const showDiff = (file1, file2, format = 'stylish') => {
   const firstFileData = getFileData(file1);
