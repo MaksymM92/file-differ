@@ -1,15 +1,16 @@
 import { Command } from 'commander/esm.mjs';
-import {
-  compare,
-  convertToString,
-  getFileData,
-} from '../utils/utils.js';
+import getFileData from '../utils/utils.js';
+import buildTree from './buildTree.js';
+import selectFormat from './formatters/formats.js';
 
-const compareFiles = (file1, file2) => {
+const showDiff = (file1, file2, format = 'stylish') => {
   const firstFileData = getFileData(file1);
   const secondFileData = getFileData(file2);
-  const comparisonResult = compare(firstFileData, secondFileData);
-  const programOutput = convertToString(comparisonResult);
+  const comparisonResult = {
+    type: 'root',
+    children: buildTree(firstFileData, secondFileData),
+  };
+  const programOutput = selectFormat(format, comparisonResult);
   return programOutput;
 };
 
@@ -21,10 +22,10 @@ const runProgramme = () => {
     .version('1.0.0')
     .arguments('<filepath1> <filepath2>')
     .option('-f, --format [type]', 'output format')
-    .action((firstFile, secondFile) => {
-      const result = compareFiles(firstFile, secondFile);
+    .action((firstFile, secondFile, format) => {
+      const result = showDiff(firstFile, secondFile, format.format);
       console.log(result);
     });
   program.parse(process.argv);
 };
-export { runProgramme, compareFiles };
+export { runProgramme, showDiff };
