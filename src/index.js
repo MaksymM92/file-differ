@@ -1,4 +1,3 @@
-import { Command } from 'commander/esm.mjs';
 import getFileData from '../utils/utils.js';
 import buildTree from './buildTree.js';
 import selectFormat from './formatters/index.js';
@@ -14,18 +13,4 @@ const showDiff = (file1, file2, format = 'stylish') => {
   return programOutput;
 };
 
-const runProgramme = () => {
-  const program = new Command();
-
-  program
-    .description('Compares two configuration __fixtures__ and shows a difference.')
-    .version('1.0.0')
-    .arguments('<filepath1> <filepath2>')
-    .option('-f, --format [type]', 'output format')
-    .action((firstFile, secondFile, format) => {
-      const result = showDiff(firstFile, secondFile, format.format);
-      console.log(result);
-    });
-  program.parse(process.argv);
-};
-export { runProgramme, showDiff };
+export default showDiff;
