@@ -15,45 +15,37 @@ const convertToString = (nodes, depth) => {
 };
 
 const renderByType = (node, depth, type, renderNodes) => {
-  let output;
   switch (type) {
     case 'root': {
       const result = node.children.map((child) => renderByType(
         child, depth + 1, child.type, renderNodes,
       ));
-      output = `{\n${result.join('\n')}\n}`;
-      break;
+      return `{\n${result.join('\n')}\n}`;
     }
     case 'nested': {
       const result = node.children.map((child) => renderByType(
         child, depth + 1, child.type, renderNodes,
       ));
-      output = `${makeIndent(depth)}  ${node.key}: {\n${result.join('\n')}\n${makeIndent(depth)}  }`;
-      break;
+      return `${makeIndent(depth)}  ${node.key}: {\n${result.join('\n')}\n${makeIndent(depth)}  }`;
     }
     case 'unchanged': {
-      output = `${makeIndent(depth)}  ${node.key}: ${convertToString(node.value, depth)}`;
-      break;
+      return `${makeIndent(depth)}  ${node.key}: ${convertToString(node.value, depth)}`;
     }
     case 'deleted': {
-      output = `${makeIndent(depth)}- ${node.key}: ${convertToString(node.value, depth)}`;
-      break;
+      return `${makeIndent(depth)}- ${node.key}: ${convertToString(node.value, depth)}`;
     }
     case 'changed': {
       const firstValue = `${makeIndent(depth)}- ${node.key}: ${convertToString(node.oldValue, depth)}`;
       const secondValue = `${makeIndent(depth)}+ ${node.key}: ${convertToString(node.newValue, depth)}`;
-      output = `${firstValue}\n${secondValue}`;
-      break;
+      return `${firstValue}\n${secondValue}`;
     }
     case 'added': {
-      output = `${makeIndent(depth)}+ ${node.key}: ${convertToString(node.value, depth)}`;
-      break;
+      return `${makeIndent(depth)}+ ${node.key}: ${convertToString(node.value, depth)}`;
     }
     default: {
       throw Error('Node type is missing or its wrong');
     }
   }
-  return output;
 };
 
 const convertTreeStylish = (tree) => {

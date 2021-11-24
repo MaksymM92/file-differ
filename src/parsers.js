@@ -1,21 +1,17 @@
 import yaml from 'js-yaml';
 
+// eslint-disable-next-line consistent-return
 const parseData = (data, format) => {
-  let parsedData;
   switch (format) {
     case 'yml':
-      parsedData = yaml.load(data);
-      break;
+      return yaml.load(data);
     case 'yaml':
-      parsedData = yaml.load(data);
-      break;
+      return yaml.load(data);
     case 'json':
-      parsedData = JSON.parse(data);
-      break;
+      return JSON.parse(data);
     default:
       break;
   }
-  return parsedData;
 };
 
 export default parseData;
