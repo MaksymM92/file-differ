@@ -9,7 +9,7 @@ const convertToString = (nodes, depth) => {
 
   const resultString = Object.entries(nodes)
     // eslint-disable-next-line no-use-before-define
-    .map((node) => renderByType({ key: node[0], value: node[1] }, depth + 2, 'unchanged'));
+    .map((node) => renderByType({ key: node[0], value: node[1] }, depth + 1, 'unchanged'));
 
   return `{\n${resultString.join('\n')}\n${makeIndent(depth)}  }`;
 };
@@ -19,14 +19,14 @@ const renderByType = (node, depth, type, renderNodes) => {
   switch (type) {
     case 'root': {
       const result = node.children.map((child) => renderByType(
-        child, depth + 2, child.type, renderNodes,
+        child, depth + 1, child.type, renderNodes,
       ));
       output = `{\n${result.join('\n')}\n}`;
       break;
     }
     case 'nested': {
       const result = node.children.map((child) => renderByType(
-        child, depth + 2, child.type, renderNodes,
+        child, depth + 1, child.type, renderNodes,
       ));
       output = `${makeIndent(depth)}  ${node.key}: {\n${result.join('\n')}\n${makeIndent(depth)}  }`;
       break;
