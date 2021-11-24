@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const makeIndent = (depth) => ' '.repeat(depth * 2);
+const makeIndent = (depth) => ' '.repeat(depth + 2 * 2);
 
 const convertToString = (nodes, depth) => {
   if (!_.isObject(nodes)) {
