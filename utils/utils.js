@@ -6,7 +6,7 @@ const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 
 const getFileData = (filePath) => {
   const buildPath = getFullPath(filePath);
-  const fileFormat = buildPath.split('.').pop();
+  const fileFormat = path.extname(filePath).slice(1);
   const data = fs.readFileSync(buildPath);
   return parseData(data, fileFormat);
 };
