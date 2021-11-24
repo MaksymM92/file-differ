@@ -5,14 +5,9 @@ import parseData from '../src/parsers.js';
 const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 
 const getFileData = (filePath) => {
-  let data;
   const buildPath = getFullPath(filePath);
   const fileFormat = buildPath.split('.').pop();
-  try {
-    data = fs.readFileSync(buildPath);
-  } catch (err) {
-    console.error(err);
-  }
+  const data = fs.readFileSync(buildPath);
   return parseData(data, fileFormat);
 };
 
