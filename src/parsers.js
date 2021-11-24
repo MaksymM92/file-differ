@@ -1,16 +1,16 @@
 import yaml from 'js-yaml';
 
-const parseData = (file, format) => {
+const parseData = (data, format) => {
   let parsedData;
   switch (format) {
     case 'yml':
-      parsedData = yaml.load(file);
+      parsedData = yaml.load(data);
       break;
     case 'yaml':
-      parsedData = yaml.load(file);
+      parsedData = yaml.load(data);
       break;
     case 'json':
-      parsedData = JSON.parse(file);
+      parsedData = JSON.parse(data);
       break;
     default:
       break;
